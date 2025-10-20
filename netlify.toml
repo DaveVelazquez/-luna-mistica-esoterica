@@ -1,0 +1,81 @@
+# Netlify Configuration para Luna Mística
+[build]
+  # Comando de build
+  command = "npm run build"
+  
+  # Directorio a publicar (Next.js con output: 'export')
+  publish = "out"
+  
+  # Directorio base
+  base = "."
+
+[build.environment]
+  # Node.js version
+  NODE_VERSION = "18"
+  
+  # Deshabilitar telemetría
+  NEXT_TELEMETRY_DISABLED = "1"
+  
+  # Optimizaciones
+  NPM_FLAGS = "--production=false"
+
+# Redirects y rewrites
+[[redirects]]
+  from = "/admin"
+  to = "/admin/login"
+  status = 302
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+[[redirects]]
+  # Fallback para SPA routing
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers de seguridad
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Configuración de formularios (para contacto)
+[forms]
+  # Habilitar formularios de Netlify
+  netlify = true
+
+# Funciones de Netlify (si las usas)
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Configuración de contexto
+[context.production.environment]
+  NODE_ENV = "production"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "production"
+
+[context.branch-deploy.environment]
+  NODE_ENV = "development"
+
+# Plugins
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[plugins]]
+  package = "netlify-plugin-lighthouse"
+  [plugins.inputs]
+    output_path = "lighthouse"
