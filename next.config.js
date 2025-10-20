@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: 'standalone', // Enables standalone server for Docker
+  // output: 'standalone', // Disabled for Amplify compatibility
   images: {
     domains: [
       'localhost',
@@ -21,10 +21,10 @@ const nextConfig = {
     ],
     formats: ['image/webp', 'image/avif'],
   },
-  // Optimizaciones de producción
-  experimental: {
-    optimizeCss: true,
-  },
+  // Optimizaciones de producción - Disabled for Amplify compatibility
+  // experimental: {
+  //   optimizeCss: true,
+  // },
   // Comprensión
   compress: true,
   // Headers de seguridad
