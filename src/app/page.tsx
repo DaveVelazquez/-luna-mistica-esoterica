@@ -142,17 +142,17 @@ export default function HomePage() {
           </CardContent>
         </Card>
 
-        <Card className="mystic-card group hover:shadow-lg transition-all duration-300">
+        <Card className="mystic-card group hover:shadow-lg transition-all duration-300 bg-white/95">
           <CardHeader>
-            <CardTitle className="text-2xl flex items-center gap-2 text-white font-cinzel">
+            <CardTitle className="text-3xl flex items-center gap-2 text-black font-cinzel">
               🔮 Servicios de Lectura
             </CardTitle>
-            <CardDescription className="text-lg text-purple-100/80">
-              Consultras personalizadas con lecturas de tarot, astrología y guía espiritual
+            <CardDescription className="text-lg text-black font-semibold">
+              Consultas personalizadas con lecturas de tarot, astrología y guía espiritual
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul className="space-y-2 text-white/80 mb-6">
+            <ul className="space-y-3 text-black font-semibold mb-8">
               <li>🃏 Lecturas de Tarot personalizadas</li>
               <li>⭐ Cartas natales y astrología</li>
               <li>💫 Consultas espirituales</li>
