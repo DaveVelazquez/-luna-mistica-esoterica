@@ -114,12 +114,12 @@ export default function HomePage() {
               <Gem className="w-8 h-8 text-purple-600" />
               <span className="text-black">Productos Místicos</span>
             </CardTitle>
-            <CardDescription className="text-lg text-gray-900 font-medium">
+            <CardDescription className="text-lg text-black font-semibold">
               Cristales sagrados, tarots ancestrales y elementos mágicos para tu despertar espiritual
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul className="space-y-3 text-gray-900 font-medium mb-8">
+            <ul className="space-y-3 text-black font-semibold mb-8">
               <li className="flex items-center gap-2">
                 <Gem className="w-4 h-4 text-purple-600" />
                 Cristales naturales con energía purificada
