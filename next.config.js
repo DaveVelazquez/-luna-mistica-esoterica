@@ -20,6 +20,10 @@ const nextConfig = {
       },
     ],
     formats: ['image/webp', 'image/avif'],
+    unoptimized: false,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   // Optimizaciones de producción - Disabled for Amplify compatibility
   // experimental: {

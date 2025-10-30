@@ -31,7 +31,7 @@ export function ProductCard({ product }: ProductCardProps) {
   }
   
   return (
-    <Card className="mystic-card group hover:scale-[1.02] transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 overflow-hidden">
+    <Card className="mystic-card group hover:scale-[1.02] transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 overflow-hidden bg-white/95">
       <CardContent className="p-0 relative">
         <div className="relative overflow-hidden">
           <Image
@@ -60,21 +60,21 @@ export function ProductCard({ product }: ProductCardProps) {
         
         <div className="p-6">
           <Link href={`/productos/${product.slug}`}>
-            <h3 className="font-semibold text-lg mb-3 line-clamp-2 text-white group-hover:text-purple-200 transition-colors">
+            <h3 className="font-semibold text-lg mb-3 line-clamp-2 text-black group-hover:text-purple-700 transition-colors">
               {product.name}
             </h3>
           </Link>
           
           <div className="flex items-center justify-between mb-4">
-            <span className="text-2xl font-bold bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
               ${product.price_mxn.toFixed(2)}
             </span>
             {product.tax_included && (
-              <span className="text-xs text-purple-200/70">✨ Energizado</span>
+              <span className="text-xs text-gray-600 font-medium">✨ Energizado</span>
             )}
           </div>
           
-          <p className="text-white/70 text-sm line-clamp-3 mb-6 leading-relaxed">
+          <p className="text-gray-700 text-sm line-clamp-3 mb-6 leading-relaxed">
             {product.description_md?.substring(0, 100)}...
           </p>
         </div>

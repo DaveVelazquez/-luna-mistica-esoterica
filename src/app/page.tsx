@@ -29,7 +29,7 @@ const featuredProducts: Product[] = [
     active: true,
     featured: true,
     created_at: '2024-01-01',
-    media: [{ id: '2', product_id: '2', url: '/placeholder-amatista.jpg', alt: 'Amatista', sort: 0 }]
+    media: [{ id: '2', product_id: '2', url: 'data:image/svg+xml,%3Csvg width=\'400\' height=\'400\' viewBox=\'0 0 400 400\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'amethyst\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop offset=\'0%25\' style=\'stop-color:%235b21b6;stop-opacity:1\' /%3E%3Cstop offset=\'100%25\' style=\'stop-color:%23a855f7;stop-opacity:1\' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=\'400\' height=\'400\' fill=\'url(%23amethyst)\'/%3E%3Cpolygon points=\'200,80 260,160 240,260 160,260 140,160\' fill=\'%239333ea\' opacity=\'0.8\'/%3E%3Cpolygon points=\'200,100 240,160 230,240 170,240 160,160\' fill=\'%23a855f7\' opacity=\'0.9\'/%3E%3Cpolygon points=\'200,120 220,160 215,220 185,220 180,160\' fill=\'%23c084fc\' /%3E%3Ccircle cx=\'200\' cy=\'200\' r=\'5\' fill=\'%23fff\' opacity=\'0.8\'/%3E%3Ctext x=\'200\' y=\'320\' font-family=\'serif\' font-size=\'24\' fill=\'%23fff\' text-anchor=\'middle\' font-weight=\'bold\'%3EAMATISTA%3C/text%3E%3Ctext x=\'200\' y=\'350\' font-family=\'serif\' font-size=\'14\' fill=\'%23e9d5ff\' text-anchor=\'middle\'%3ECristal Natural%3C/text%3E%3C/svg%3E', alt: 'Amatista', sort: 0 }]
   },
   {
     id: '3',
@@ -41,7 +41,7 @@ const featuredProducts: Product[] = [
     active: true,
     featured: true,
     created_at: '2024-01-01',
-    media: [{ id: '3', product_id: '3', url: '/placeholder-vela.jpg', alt: 'Vela de Protección', sort: 0 }]
+    media: [{ id: '3', product_id: '3', url: 'data:image/svg+xml,%3Csvg width=\'400\' height=\'400\' viewBox=\'0 0 400 400\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'candle\' x1=\'0%25\' y1=\'0%25\' x2=\'0%25\' y2=\'100%25\'%3E%3Cstop offset=\'0%25\' style=\'stop-color:%231e293b;stop-opacity:1\' /%3E%3Cstop offset=\'100%25\' style=\'stop-color:%23475569;stop-opacity:1\' /%3E%3C/linearGradient%3E%3CradialGradient id=\'flame\'%3E%3Cstop offset=\'0%25\' style=\'stop-color:%23fef08a;stop-opacity:1\' /%3E%3Cstop offset=\'50%25\' style=\'stop-color:%23fbbf24;stop-opacity:1\' /%3E%3Cstop offset=\'100%25\' style=\'stop-color:%23f97316;stop-opacity:0.8\' /%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width=\'400\' height=\'400\' fill=\'url(%23candle)\'/%3E%3Crect x=\'150\' y=\'180\' width=\'100\' height=\'160\' rx=\'5\' fill=\'%23f8fafc\'/%3E%3Cellipse cx=\'200\' cy=\'180\' rx=\'50\' ry=\'10\' fill=\'%23e2e8f0\'/%3E%3Crect x=\'195\' y=\'140\' width=\'10\' height=\'40\' fill=\'%23334155\'/%3E%3Cellipse cx=\'200\' cy=\'120\' rx=\'20\' ry=\'30\' fill=\'url(%23flame)\' opacity=\'0.9\'/%3E%3Cellipse cx=\'200\' cy=\'115\' rx=\'12\' ry=\'20\' fill=\'%23fef08a\' opacity=\'0.8\'/%3E%3Ctext x=\'200\' y=\'370\' font-family=\'serif\' font-size=\'20\' fill=\'%23fff\' text-anchor=\'middle\' font-weight=\'bold\'%3EVELA BLANCA%3C/text%3E%3C/svg%3E', alt: 'Vela de Protección', sort: 0 }]
   }
 ]
 
@@ -95,8 +95,7 @@ export default function HomePage() {
             <Link href="/servicios">
               <Button 
                 size="lg" 
-                variant="outline" 
-                className="border-2 border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg backdrop-blur-sm"
+                className="mystic-button text-white px-8 py-4 text-lg font-semibold hover:shadow-2xl hover:shadow-purple-500/50"
               >
                 <Moon className="w-5 h-5 mr-2" />
                 Consultar el Cosmos
@@ -204,9 +203,11 @@ export default function HomePage() {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-white hover:bg-white hover:text-purple-600 bg-gradient-to-r from-pink-400 to-purple-500 text-transparent bg-clip-text hover:from-purple-600 hover:to-purple-600 font-semibold"
+              className="bg-white border-2 border-white hover:bg-purple-600 hover:border-purple-600 hover:text-white transition-all duration-300"
             >
-              Contactar WhatsApp
+              <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent font-bold hover:text-white">
+                Contactar WhatsApp
+              </span>
             </Button>
           </a>
         </div>
