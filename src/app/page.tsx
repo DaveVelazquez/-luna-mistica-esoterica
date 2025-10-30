@@ -110,26 +110,26 @@ export default function HomePage() {
       <section className="container mx-auto px-4 grid md:grid-cols-2 gap-8 mb-20">
         <Card className="mystic-card group hover:scale-[1.02] transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20">
           <CardHeader>
-            <CardTitle className="text-3xl flex items-center gap-3 text-white font-cinzel">
-              <Gem className="w-8 h-8 text-purple-300" />
-              <span className="mystic-text">Productos Místicos</span>
+            <CardTitle className="text-3xl flex items-center gap-3 text-black font-cinzel">
+              <Gem className="w-8 h-8 text-purple-600" />
+              <span className="mystic-text text-black">Productos Místicos</span>
             </CardTitle>
-            <CardDescription className="text-lg text-purple-100/80">
+            <CardDescription className="text-lg text-gray-800">
               Cristales sagrados, tarots ancestrales y elementos mágicos para tu despertar espiritual
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul className="space-y-3 text-white/80 mb-8">
+            <ul className="space-y-3 text-black mb-8">
               <li className="flex items-center gap-2">
-                <Gem className="w-4 h-4 text-purple-300" />
+                <Gem className="w-4 h-4 text-purple-600" />
                 Cristales naturales con energía purificada
               </li>
               <li className="flex items-center gap-2">
-                <Star className="w-4 h-4 text-yellow-300" />
+                <Star className="w-4 h-4 text-yellow-600" />
                 Tarots tradicionales y oráculos modernos
               </li>
               <li className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-pink-300" />
+                <Sparkles className="w-4 h-4 text-pink-600" />
                 Velas rituales con hierbas consagradas
               </li>
               <li>🌿 Inciensos y aceites esenciales</li>
