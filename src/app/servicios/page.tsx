@@ -171,7 +171,7 @@ export default function ServicesPage() {
           </div>
           <div className="flex items-center text-sm text-gray-600">
             <Users className="h-4 w-4 mr-2 text-purple-600" />
-            También presencial en CDMX
+            También presencial en Mérida
           </div>
         </div>
       </div>
@@ -252,7 +252,7 @@ export default function ServicesPage() {
           <Button size="lg" variant="secondary">
             Consulta Gratuita por WhatsApp
           </Button>
-          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600">
+          <Button size="lg" className="bg-white text-purple-700 font-bold border-2 border-white hover:bg-purple-700 hover:text-white transition-all duration-300">
             Ver Disponibilidad
           </Button>
         </div>
