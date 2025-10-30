@@ -108,18 +108,18 @@ export default function HomePage() {
 
       {/* Secciones principales */}
       <section className="container mx-auto px-4 grid md:grid-cols-2 gap-8 mb-20">
-        <Card className="mystic-card group hover:scale-[1.02] transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20">
+        <Card className="mystic-card group hover:scale-[1.02] transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 bg-white/95">
           <CardHeader>
             <CardTitle className="text-3xl flex items-center gap-3 text-black font-cinzel">
               <Gem className="w-8 h-8 text-purple-600" />
-              <span className="mystic-text text-black">Productos Místicos</span>
+              <span className="text-black">Productos Místicos</span>
             </CardTitle>
-            <CardDescription className="text-lg text-gray-800">
+            <CardDescription className="text-lg text-gray-900 font-medium">
               Cristales sagrados, tarots ancestrales y elementos mágicos para tu despertar espiritual
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul className="space-y-3 text-black mb-8">
+            <ul className="space-y-3 text-gray-900 font-medium mb-8">
               <li className="flex items-center gap-2">
                 <Gem className="w-4 h-4 text-purple-600" />
                 Cristales naturales con energía purificada
