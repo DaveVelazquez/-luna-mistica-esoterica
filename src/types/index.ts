@@ -66,10 +66,12 @@ export interface Service {
   id: string
   slug: string
   name: string
+  description_md?: string
   duration_min: number
   price_mxn: number
   mode: 'in_person' | 'video'
   active: boolean
+  created_at?: string
 }
 
 export interface ServiceSlot {
