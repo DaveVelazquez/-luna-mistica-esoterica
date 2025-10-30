@@ -2,6 +2,10 @@
 
 Una plataforma completa de e-commerce para tienda esotérica con sistema de productos y reservas de servicios (lecturas de tarot), construida únicamente con herramientas gratuitas.
 
+## 🌐 **Aplicación en Producción**
+
+**URL**: https://main.d1a7gqykv9s6bd.amplifyapp.com/
+
 ## 🚀 Stack Tecnológico (100% Gratuito)
 
 ### Frontend
@@ -134,6 +138,35 @@ npm run dev
 \`\`\`
 
 El proyecto estará disponible en `http://localhost:3000`
+
+**⚠️ Nota para Windows**: Si encuentras errores de permisos (EPERM), ejecuta PowerShell como Administrador.
+
+## 🔄 Workflow de Desarrollo Recomendado
+
+### Opción 1: Desarrollo con AWS Amplify (Recomendado)
+La forma más simple de trabajar es usar el deploy automático de Amplify:
+
+1. Hacer cambios en el código localmente
+2. Commit y push a GitHub: `git push`
+3. Amplify despliega automáticamente (~5-7 min)
+4. Verificar cambios en: https://main.d1a7gqykv9s6bd.amplifyapp.com/
+
+**Ventajas**: Sin configuración local compleja, entorno idéntico a producción, deploy automático.
+
+### Opción 2: Desarrollo Local
+Para iteración rápida en local (requiere permisos de administrador):
+```powershell
+npm run dev
+```
+
+📖 **Ver [DEVELOPMENT_WORKFLOW.md](DEVELOPMENT_WORKFLOW.md)** para guía completa de desarrollo.
+
+## 📚 Documentación Adicional
+
+- 📖 **[DEVELOPMENT_WORKFLOW.md](DEVELOPMENT_WORKFLOW.md)** - Guía completa de desarrollo
+- 🚀 **[AWS_DEPLOYMENT.md](AWS_DEPLOYMENT.md)** - Despliegue en AWS
+- 💾 **[SUPABASE_SETUP.md](SUPABASE_SETUP.md)** - Configuración de base de datos
+- 🌐 **[DOMAIN_SETUP.md](DOMAIN_SETUP.md)** - Configuración de dominio personalizado
 
 ## 🎯 Próximos Pasos
 

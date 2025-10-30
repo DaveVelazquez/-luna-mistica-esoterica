@@ -67,15 +67,15 @@ export function Footer() {
             <ul className="space-y-3 text-purple-200">
               <li className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
-                <span>info@tiendaesoterica.com</span>
+                <span>lunatiendaesoterica@gmail.com</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
-                <span>+52 55 1234-5678</span>
+                <span>+52 55 56 42 43 41</span>
               </li>
               <li className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>Ciudad de México, México</span>
+                <span>Mérida, Yucatán/span>
               </li>
             </ul>
           </div>
