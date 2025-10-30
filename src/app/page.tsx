@@ -196,9 +196,19 @@ export default function HomePage() {
           <Button size="lg" variant="secondary">
             Suscribirse al Newsletter
           </Button>
-          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600">
-            Contactar Whatsapp
-          </Button>
+          <a 
+            href="https://wa.me/5255564243414?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20sus%20productos%20y%20servicios%20esotéricos" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-white hover:bg-white hover:text-purple-600 bg-gradient-to-r from-pink-400 to-purple-500 text-transparent bg-clip-text hover:from-purple-600 hover:to-purple-600 font-semibold"
+            >
+              Contactar WhatsApp
+            </Button>
+          </a>
         </div>
       </section>
     </div>
