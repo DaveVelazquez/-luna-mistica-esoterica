@@ -20,7 +20,10 @@ import {
   Sparkles,
   Clock,
   Video,
-  MapPin
+  MapPin,
+  ArrowUpDown,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react'
 import { requireAdminAuth, clearAdminSession, AdminSession } from '@/lib/admin-auth'
 import { Product, Service } from '@/types'
@@ -110,6 +113,16 @@ export default function AdminCatalogoPage() {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
   const [editingService, setEditingService] = useState<Service | null>(null)
   const [isAddingNew, setIsAddingNew] = useState(false)
+  
+  // Estados para ordenamiento y paginación
+  const [productSortBy, setProductSortBy] = useState<'name' | 'price' | 'created'>('name')
+  const [productSortOrder, setProductSortOrder] = useState<'asc' | 'desc'>('asc')
+  const [serviceSortBy, setServiceSortBy] = useState<'name' | 'price' | 'duration'>('name')
+  const [serviceSortOrder, setServiceSortOrder] = useState<'asc' | 'desc'>('asc')
+  const [currentProductPage, setCurrentProductPage] = useState(1)
+  const [currentServicePage, setCurrentServicePage] = useState(1)
+  const [itemsPerPage, setItemsPerPage] = useState(10)
+  
   const router = useRouter()
 
   useEffect(() => {
@@ -124,9 +137,65 @@ export default function AdminCatalogoPage() {
     router.push('/admin/login')
   }
 
-  const filteredProducts = products.filter(product =>
+  // Funciones de ordenamiento
+  const sortProducts = (products: Product[]) => {
+    return [...products].sort((a, b) => {
+      let comparison = 0
+      if (productSortBy === 'name') {
+        comparison = a.name.localeCompare(b.name)
+      } else if (productSortBy === 'price') {
+        comparison = a.price_mxn - b.price_mxn
+      } else if (productSortBy === 'created') {
+        comparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+      }
+      return productSortOrder === 'asc' ? comparison : -comparison
+    })
+  }
+
+  const sortServices = (services: Service[]) => {
+    return [...services].sort((a, b) => {
+      let comparison = 0
+      if (serviceSortBy === 'name') {
+        comparison = a.name.localeCompare(b.name)
+      } else if (serviceSortBy === 'price') {
+        comparison = a.price_mxn - b.price_mxn
+      } else if (serviceSortBy === 'duration') {
+        comparison = a.duration_min - b.duration_min
+      }
+      return serviceSortOrder === 'asc' ? comparison : -comparison
+    })
+  }
+
+  const toggleProductSort = (field: 'name' | 'price' | 'created') => {
+    if (productSortBy === field) {
+      setProductSortOrder(productSortOrder === 'asc' ? 'desc' : 'asc')
+    } else {
+      setProductSortBy(field)
+      setProductSortOrder('asc')
+    }
+    setCurrentProductPage(1)
+  }
+
+  const toggleServiceSort = (field: 'name' | 'price' | 'duration') => {
+    if (serviceSortBy === field) {
+      setServiceSortOrder(serviceSortOrder === 'asc' ? 'desc' : 'asc')
+    } else {
+      setServiceSortBy(field)
+      setServiceSortOrder('asc')
+    }
+    setCurrentServicePage(1)
+  }
+
+  const filteredProducts = sortProducts(products.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     product.slug.toLowerCase().includes(searchTerm.toLowerCase())
+  ))
+
+  // Paginación de productos
+  const totalProductPages = Math.ceil(filteredProducts.length / itemsPerPage)
+  const paginatedProducts = filteredProducts.slice(
+    (currentProductPage - 1) * itemsPerPage,
+    currentProductPage * itemsPerPage
   )
 
   const handleEditProduct = (product: Product) => {
@@ -177,9 +246,16 @@ export default function AdminCatalogoPage() {
   }
 
   // Funciones para manejar servicios
-  const filteredServices = services.filter(service =>
+  const filteredServices = sortServices(services.filter(service =>
     service.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     service.slug.toLowerCase().includes(searchTerm.toLowerCase())
+  ))
+
+  // Paginación de servicios
+  const totalServicePages = Math.ceil(filteredServices.length / itemsPerPage)
+  const paginatedServices = filteredServices.slice(
+    (currentServicePage - 1) * itemsPerPage,
+    currentServicePage * itemsPerPage
   )
 
   const handleEditService = (service: Service) => {
@@ -310,12 +386,58 @@ export default function AdminCatalogoPage() {
                     className="pl-12 h-12 text-base bg-white border-2 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-purple-600 font-medium"
                   />
                 </div>
+                
+                {/* Controles de ordenamiento y paginación */}
+                <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-bold text-gray-700">Ordenar por:</span>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => toggleProductSort('name')}
+                      className={`h-8 px-3 text-sm font-medium ${productSortBy === 'name' ? 'bg-purple-100 border-purple-600' : ''}`}
+                    >
+                      Nombre {productSortBy === 'name' && (productSortOrder === 'asc' ? '↑' : '↓')}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => toggleProductSort('price')}
+                      className={`h-8 px-3 text-sm font-medium ${productSortBy === 'price' ? 'bg-purple-100 border-purple-600' : ''}`}
+                    >
+                      Precio {productSortBy === 'price' && (productSortOrder === 'asc' ? '↑' : '↓')}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => toggleProductSort('created')}
+                      className={`h-8 px-3 text-sm font-medium ${productSortBy === 'created' ? 'bg-purple-100 border-purple-600' : ''}`}
+                    >
+                      Fecha {productSortBy === 'created' && (productSortOrder === 'asc' ? '↑' : '↓')}
+                    </Button>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-bold text-gray-700">Por página:</span>
+                    <select
+                      value={itemsPerPage}
+                      onChange={(e) => {
+                        setItemsPerPage(Number(e.target.value))
+                        setCurrentProductPage(1)
+                      }}
+                      className="h-8 text-sm bg-white border-2 border-gray-300 text-gray-900 rounded-md px-2 font-medium"
+                    >
+                      <option value={10}>10</option>
+                      <option value={25}>25</option>
+                      <option value={50}>50</option>
+                    </select>
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
             {/* Lista de productos */}
             <div className="grid gap-4">
-              {filteredProducts.map((product) => (
+              {paginatedProducts.map((product) => (
                 <Card key={product.id} className="bg-white/95 backdrop-blur-sm border-2 border-purple-300 shadow-lg">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
@@ -367,6 +489,44 @@ export default function AdminCatalogoPage() {
                 </Card>
               ))}
             </div>
+
+            {/* Controles de paginación productos */}
+            {totalProductPages > 1 && (
+              <Card className="bg-white/95 backdrop-blur-sm border-2 border-purple-300 shadow-lg">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="text-sm text-gray-700 font-medium">
+                      Mostrando {((currentProductPage - 1) * itemsPerPage) + 1} - {Math.min(currentProductPage * itemsPerPage, filteredProducts.length)} de {filteredProducts.length} productos
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setCurrentProductPage(Math.max(1, currentProductPage - 1))}
+                        disabled={currentProductPage === 1}
+                        className="h-9 px-3 border-2 font-bold disabled:opacity-50"
+                      >
+                        <ChevronLeft className="w-4 h-4 mr-1" />
+                        Anterior
+                      </Button>
+                      <span className="text-sm font-bold text-gray-900 px-3">
+                        Página {currentProductPage} de {totalProductPages}
+                      </span>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setCurrentProductPage(Math.min(totalProductPages, currentProductPage + 1))}
+                        disabled={currentProductPage === totalProductPages}
+                        className="h-9 px-3 border-2 font-bold disabled:opacity-50"
+                      >
+                        Siguiente
+                        <ChevronRight className="w-4 h-4 ml-1" />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </TabsContent>
 
           <TabsContent value="services" className="space-y-6">
@@ -396,12 +556,58 @@ export default function AdminCatalogoPage() {
                     className="pl-12 h-12 text-base bg-white border-2 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-purple-600 font-medium"
                   />
                 </div>
+                
+                {/* Controles de ordenamiento y paginación servicios */}
+                <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-bold text-gray-700">Ordenar por:</span>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => toggleServiceSort('name')}
+                      className={`h-8 px-3 text-sm font-medium ${serviceSortBy === 'name' ? 'bg-purple-100 border-purple-600' : ''}`}
+                    >
+                      Nombre {serviceSortBy === 'name' && (serviceSortOrder === 'asc' ? '↑' : '↓')}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => toggleServiceSort('price')}
+                      className={`h-8 px-3 text-sm font-medium ${serviceSortBy === 'price' ? 'bg-purple-100 border-purple-600' : ''}`}
+                    >
+                      Precio {serviceSortBy === 'price' && (serviceSortOrder === 'asc' ? '↑' : '↓')}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => toggleServiceSort('duration')}
+                      className={`h-8 px-3 text-sm font-medium ${serviceSortBy === 'duration' ? 'bg-purple-100 border-purple-600' : ''}`}
+                    >
+                      Duración {serviceSortBy === 'duration' && (serviceSortOrder === 'asc' ? '↑' : '↓')}
+                    </Button>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-bold text-gray-700">Por página:</span>
+                    <select
+                      value={itemsPerPage}
+                      onChange={(e) => {
+                        setItemsPerPage(Number(e.target.value))
+                        setCurrentServicePage(1)
+                      }}
+                      className="h-8 text-sm bg-white border-2 border-gray-300 text-gray-900 rounded-md px-2 font-medium"
+                    >
+                      <option value={10}>10</option>
+                      <option value={25}>25</option>
+                      <option value={50}>50</option>
+                    </select>
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
             {/* Lista de servicios */}
             <div className="grid gap-4">
-              {filteredServices.map((service) => (
+              {paginatedServices.map((service) => (
                 <Card key={service.id} className="bg-white/95 backdrop-blur-sm border-2 border-purple-300 shadow-lg">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
@@ -463,6 +669,44 @@ export default function AdminCatalogoPage() {
                 </Card>
               ))}
             </div>
+
+            {/* Controles de paginación servicios */}
+            {totalServicePages > 1 && (
+              <Card className="bg-white/95 backdrop-blur-sm border-2 border-purple-300 shadow-lg">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="text-sm text-gray-700 font-medium">
+                      Mostrando {((currentServicePage - 1) * itemsPerPage) + 1} - {Math.min(currentServicePage * itemsPerPage, filteredServices.length)} de {filteredServices.length} servicios
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setCurrentServicePage(Math.max(1, currentServicePage - 1))}
+                        disabled={currentServicePage === 1}
+                        className="h-9 px-3 border-2 font-bold disabled:opacity-50"
+                      >
+                        <ChevronLeft className="w-4 h-4 mr-1" />
+                        Anterior
+                      </Button>
+                      <span className="text-sm font-bold text-gray-900 px-3">
+                        Página {currentServicePage} de {totalServicePages}
+                      </span>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setCurrentServicePage(Math.min(totalServicePages, currentServicePage + 1))}
+                        disabled={currentServicePage === totalServicePages}
+                        className="h-9 px-3 border-2 font-bold disabled:opacity-50"
+                      >
+                        Siguiente
+                        <ChevronRight className="w-4 h-4 ml-1" />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </TabsContent>
 
           <TabsContent value="analytics">
